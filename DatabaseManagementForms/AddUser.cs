@@ -22,7 +22,6 @@ namespace DatabaseManagementForms
             AddUser_toolStrip_delete = new ToolStripMenuItem();
             _contextMenuStrip = new ContextMenuStrip();
             _contextMenuStrip.Items.Add(AddUser_toolStrip_delete);
-           
             AddUser_contextMenuStrip = _contextMenuStrip; 
             InitializeComponent();
         }
@@ -31,7 +30,6 @@ namespace DatabaseManagementForms
         {
             _context = ctx;
             customerTableAdapter = new AdventureWorksLT2008R2DataSetTableAdapters.CustomerTableAdapter();
-            //InitializeComponent();
         }
 
         public Users CreateRandomUser()
@@ -74,7 +72,7 @@ namespace DatabaseManagementForms
             MessageBox.Show("Users added.");
         }
 
-        private async void BulkCreateRandomUsers_button_Click(object sender, EventArgs e)
+        private void BulkCreateRandomUsers_button_Click(object sender, EventArgs e)
         {
             UsersUtility.CreateRandomUsers(customerTableAdapter, usersBindingSource);
             Refresh();

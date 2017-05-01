@@ -14,6 +14,7 @@ namespace DatabaseManagementForms
 
     public class UsersUtility
     {
+        public static Random random = new Random(); 
         public static void CreateRandomUsers(CustomerTableAdapter customerTableAdapter, BindingSource bindingSource)
         {
             Random random = new Random();
@@ -29,6 +30,22 @@ namespace DatabaseManagementForms
                 newUser.Created = DateTime.Now;
                 bindingSource.Add(newUser);
             } 
+        }
+
+        public static List<DateTime> CreateRandomDates(int amount)
+        {
+            List<DateTime> dates = new List<DateTime>(new DateTime[amount]);
+            DateTime minDate = new DateTime(2012, 1, 1);
+            DateTime maxDate = DateTime.Now;
+            long elapsedTicks = maxDate.Ticks - minDate.Ticks;
+            
+
+            for(int i = 0; i < amount; ++i)
+            {
+                dates[i] = new DateTime(DateTime.Now.Ticks - (elapsedTicks / random.Next(1,100)));
+            }
+
+            return dates;
         }
     }
 }

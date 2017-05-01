@@ -59,6 +59,8 @@
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SaveModificationsButton = new System.Windows.Forms.Button();
             this.AddUserButton = new System.Windows.Forms.Button();
+            this.RetrieveUsers_button = new System.Windows.Forms.Button();
+            this.RandomCreateDates_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -121,9 +123,9 @@
             this.skillsDataGridViewTextBoxColumn,
             this.rolesDataGridViewTextBoxColumn});
             this.UsersDataGrid.DataSource = this.usersBindingSource;
-            this.UsersDataGrid.Location = new System.Drawing.Point(3, 129);
+            this.UsersDataGrid.Location = new System.Drawing.Point(15, 129);
             this.UsersDataGrid.Name = "UsersDataGrid";
-            this.UsersDataGrid.Size = new System.Drawing.Size(1116, 150);
+            this.UsersDataGrid.Size = new System.Drawing.Size(1104, 472);
             this.UsersDataGrid.TabIndex = 3;
             // 
             // idDataGridViewTextBoxColumn
@@ -270,7 +272,7 @@
             // 
             // SaveModificationsButton
             // 
-            this.SaveModificationsButton.Location = new System.Drawing.Point(1018, 285);
+            this.SaveModificationsButton.Location = new System.Drawing.Point(1018, 607);
             this.SaveModificationsButton.Name = "SaveModificationsButton";
             this.SaveModificationsButton.Size = new System.Drawing.Size(101, 23);
             this.SaveModificationsButton.TabIndex = 4;
@@ -288,12 +290,34 @@
             this.AddUserButton.UseVisualStyleBackColor = true;
             this.AddUserButton.Click += new System.EventHandler(this.AddUser_button_click);
             // 
+            // RetrieveUsers_button
+            // 
+            this.RetrieveUsers_button.Location = new System.Drawing.Point(96, 100);
+            this.RetrieveUsers_button.Name = "RetrieveUsers_button";
+            this.RetrieveUsers_button.Size = new System.Drawing.Size(100, 23);
+            this.RetrieveUsers_button.TabIndex = 6;
+            this.RetrieveUsers_button.Text = "Retrieve All Users";
+            this.RetrieveUsers_button.UseVisualStyleBackColor = true;
+            this.RetrieveUsers_button.Click += new System.EventHandler(this.RetrieveAllUsers_button_Click);
+            // 
+            // RandomCreateDates_button
+            // 
+            this.RandomCreateDates_button.Location = new System.Drawing.Point(222, 99);
+            this.RandomCreateDates_button.Name = "RandomCreateDates_button";
+            this.RandomCreateDates_button.Size = new System.Drawing.Size(167, 23);
+            this.RandomCreateDates_button.TabIndex = 7;
+            this.RandomCreateDates_button.Text = "Assign Random Create Dates";
+            this.RandomCreateDates_button.UseVisualStyleBackColor = true;
+            this.RandomCreateDates_button.Click += new System.EventHandler(this.RandomCreateDates_button_Click);
+            // 
             // UsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1131, 429);
+            this.ClientSize = new System.Drawing.Size(1131, 642);
+            this.Controls.Add(this.RandomCreateDates_button);
+            this.Controls.Add(this.RetrieveUsers_button);
             this.Controls.Add(this.AddUserButton);
             this.Controls.Add(this.SaveModificationsButton);
             this.Controls.Add(this.UsersDataGrid);
@@ -341,6 +365,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rolesDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button SaveModificationsButton;
         private System.Windows.Forms.Button AddUserButton;
+        private System.Windows.Forms.Button RetrieveUsers_button;
+        private System.Windows.Forms.Button RandomCreateDates_button;
     }
 }
 
