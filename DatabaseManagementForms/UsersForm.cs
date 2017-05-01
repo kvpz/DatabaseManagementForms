@@ -100,11 +100,15 @@ namespace DatabaseManagementForms
             }
 
             List<Users> bindingUsers = (List<Users>)usersBindingSource.List;
+            
             List<Collaborators> _collabs = new List<Collaborators>();
+            _context.Configuration.AutoDetectChangesEnabled = false;
             // Create a collaboration between a user and the two (rows) after.
             for(int i = 0; i < selectedRowIndex.Count; ++i)
             {
                 int j = i + 1;
+                int userdataGridi = UsersDataGrid["userNameDataGridViewTextBoxColumn", i].ColumnIndex;
+                int totalCollabsAdded = 0;
                 for( ; j < selectedRowIndex.Count && j < i + 3 && j < UsersDataGrid.RowCount - 2; ++j)
                 {
                     Collaborators collabs = new Collaborators();
@@ -118,13 +122,17 @@ namespace DatabaseManagementForms
                     collabs.Initiated = true;
                     collabs.Following = true;
 
-                    if(!collabChecker.ContainsKey(collabs.UserA) || !collabChecker[collabs.UserA].ContainsKey(collabs.UserB))
-                        _collabs.Add(collabs);
+                    if (!collabChecker.ContainsKey(collabs.UserA) || !collabChecker[collabs.UserA].ContainsKey(collabs.UserB))
+                    {
+                        _context.Collaborators.Add(collabs);//_collabs.Add(collabs);
+                        if (++totalCollabsAdded % 100  == 0)
+                        {
+                            _context.SaveChanges();
+                        }
+                    }
                 }
                 i = j - 1;
             }
-
-            _context.Collaborators.AddOrUpdate(c => new { c.UserA, c.UserB }, _collabs.ToArray());
 
             MessageBox.Show("Collaborators set!");
         }
