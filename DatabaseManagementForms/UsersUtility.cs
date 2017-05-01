@@ -48,4 +48,23 @@ namespace DatabaseManagementForms
             return dates;
         }
     }
+
+    public class UserEqualityComparer : IEqualityComparer<Users>
+    {
+        public static bool CompareUsers(Users A, Users B)
+        {
+            UserEqualityComparer comp = new UserEqualityComparer();
+            return comp.Equals(A, B);
+        }
+
+        public bool Equals(Users x, Users y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetHashCode(Users obj)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

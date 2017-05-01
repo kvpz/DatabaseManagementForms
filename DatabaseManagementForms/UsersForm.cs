@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -76,6 +77,56 @@ namespace DatabaseManagementForms
             {
                 row.Cells["createdDataGridViewTextBoxColumn"].Value = UsersUtility.CreateRandomDates(1)[0];
             }
+        }
+
+        private void CreateCollaborators_button_Click(object sender, EventArgs e)
+        {
+            // Store the indexes representing the rows selected
+            int totalUsersSelected = UsersDataGrid.SelectedRows.Count;
+            List<int> selectedRowIndex = new List<int>(new int[UsersDataGrid.SelectedRows.Count]);;
+            for(int i = 0; i < selectedRowIndex.Count; ++i)
+            {
+                selectedRowIndex[i] = UsersDataGrid.SelectedRows[i].Index;
+            }
+
+            _context.Collaborators.Load();
+            Dictionary<string, Dictionary<string, bool>> collabChecker = new Dictionary<string, Dictionary<string, bool>>(_context.Collaborators.Count());
+            foreach (Collaborators co in _context.Collaborators.Local)
+            {
+                if (!collabChecker.ContainsKey(co.UserA))
+                    collabChecker.Add(co.UserA, new Dictionary<string, bool>() { { co.UserB, true } });
+                else
+                    collabChecker[co.UserA].Add(co.UserB, true);
+            }
+
+            List<Users> bindingUsers = (List<Users>)usersBindingSource.List;
+            List<Collaborators> _collabs = new List<Collaborators>();
+            // Create a collaboration between a user and the two (rows) after.
+            for(int i = 0; i < selectedRowIndex.Count; ++i)
+            {
+                int j = i + 1;
+                for( ; j < selectedRowIndex.Count && j < i + 3 && j < UsersDataGrid.RowCount - 2; ++j)
+                {
+                    Collaborators collabs = new Collaborators();
+                    string userNameA = (string)UsersDataGrid["userNameDataGridViewTextBoxColumn", i].Value;
+                    collabs.Users = bindingUsers[i];
+                    collabs.UserA = collabs.Users.Id;
+                    string userNameB = (string)UsersDataGrid["userNameDataGridViewTextBoxColumn", j].Value;
+                    collabs.Users1 = bindingUsers[j];
+                    collabs.UserB = collabs.Users1.Id;
+                    collabs.InitialCollaboration = DateTime.Now;
+                    collabs.Initiated = true;
+                    collabs.Following = true;
+
+                    if(!collabChecker.ContainsKey(collabs.UserA) || !collabChecker[collabs.UserA].ContainsKey(collabs.UserB))
+                        _collabs.Add(collabs);
+                }
+                i = j - 1;
+            }
+
+            _context.Collaborators.AddOrUpdate(c => new { c.UserA, c.UserB }, _collabs.ToArray());
+
+            MessageBox.Show("Collaborators set!");
         }
     }
 }

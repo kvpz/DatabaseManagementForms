@@ -61,6 +61,7 @@
             this.AddUserButton = new System.Windows.Forms.Button();
             this.RetrieveUsers_button = new System.Windows.Forms.Button();
             this.RandomCreateDates_button = new System.Windows.Forms.Button();
+            this.CreateCollaborators_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -310,12 +311,23 @@
             this.RandomCreateDates_button.UseVisualStyleBackColor = true;
             this.RandomCreateDates_button.Click += new System.EventHandler(this.RandomCreateDates_button_Click);
             // 
+            // CreateCollaborators_button
+            // 
+            this.CreateCollaborators_button.Location = new System.Drawing.Point(421, 100);
+            this.CreateCollaborators_button.Name = "CreateCollaborators_button";
+            this.CreateCollaborators_button.Size = new System.Drawing.Size(123, 23);
+            this.CreateCollaborators_button.TabIndex = 8;
+            this.CreateCollaborators_button.Text = "Create Collaborators";
+            this.CreateCollaborators_button.UseVisualStyleBackColor = true;
+            this.CreateCollaborators_button.Click += new System.EventHandler(this.CreateCollaborators_button_Click);
+            // 
             // UsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
             this.ClientSize = new System.Drawing.Size(1131, 642);
+            this.Controls.Add(this.CreateCollaborators_button);
             this.Controls.Add(this.RandomCreateDates_button);
             this.Controls.Add(this.RetrieveUsers_button);
             this.Controls.Add(this.AddUserButton);
@@ -367,6 +379,7 @@
         private System.Windows.Forms.Button AddUserButton;
         private System.Windows.Forms.Button RetrieveUsers_button;
         private System.Windows.Forms.Button RandomCreateDates_button;
+        private System.Windows.Forms.Button CreateCollaborators_button;
     }
 }
 
