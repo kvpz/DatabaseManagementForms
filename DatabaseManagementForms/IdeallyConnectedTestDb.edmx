@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IdeallyConnectedTestDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Businesses">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="ChatService" Type="bit" Nullable="false" />
+          <Property Name="P2PService" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Collaborators">
+          <Key>
+            <PropertyRef Name="UserA" />
+            <PropertyRef Name="UserB" />
+          </Key>
+          <Property Name="UserA" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserB" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Following" Type="bit" Nullable="false" />
+          <Property Name="Initiated" Type="bit" Nullable="false" />
+          <Property Name="InitialCollaboration" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesignSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TypeOfDesign" Type="nvarchar(max)" />
+          <Property Name="Software" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StateAbbreviation" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="County" Type="nvarchar(max)" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicalSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CPR" Type="bit" Nullable="false" />
+          <Property Name="EKG" Type="bit" Nullable="false" />
+          <Property Name="Transfussions" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProgrammingSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProgrammingLanguages" Type="nvarchar(max)" />
+          <Property Name="Software" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Expertise" Type="tinyint" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SkillUserRelation">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="SkillId" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SkillId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpeakingSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Languages" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserLocations">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="TotalVisitations" Type="int" Nullable="false" />
+          <Property Name="FirstVisited" Type="datetime" Nullable="false" />
+          <Property Name="LastVisited" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Biography" Type="nvarchar(max)" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Businesses_dbo_Locations_LocationID">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Businesses" Type="Self.Businesses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Businesses">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collaborators_dbo_Users_UserA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Collaborators" Type="Self.Collaborators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collaborators">
+              <PropertyRef Name="UserA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collaborators_dbo_Users_UserB">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Collaborators" Type="Self.Collaborators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collaborators">
+              <PropertyRef Name="UserB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DesignSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="DesignSkills" Type="Self.DesignSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="DesignSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="MedicalSkills" Type="Self.MedicalSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="MedicalSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="ProgrammingSkills" Type="Self.ProgrammingSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="ProgrammingSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SkillUserRelation_dbo_Skills_SkillId_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SkillUserRelation" Type="Self.SkillUserRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="SkillUserRelation">
+              <PropertyRef Name="SkillId" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SkillUserRelation_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SkillUserRelation" Type="Self.SkillUserRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SkillUserRelation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SpeakingSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="SpeakingSkills" Type="Self.SpeakingSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="SpeakingSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserClaims" Type="Self.UserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLocations_dbo_Locations_LocationID">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLocations_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLogins_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IdeallyConnectedTestDbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Businesses" EntityType="Self.Businesses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collaborators" EntityType="Self.Collaborators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesignSkills" EntityType="Self.DesignSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalSkills" EntityType="Self.MedicalSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgrammingSkills" EntityType="Self.ProgrammingSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkillUserRelation" EntityType="Self.SkillUserRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpeakingSkills" EntityType="Self.SpeakingSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Businesses_dbo_Locations_LocationID" Association="Self.FK_dbo_Businesses_dbo_Locations_LocationID">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Businesses" EntitySet="Businesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collaborators_dbo_Users_UserA" Association="Self.FK_dbo_Collaborators_dbo_Users_UserA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collaborators" EntitySet="Collaborators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collaborators_dbo_Users_UserB" Association="Self.FK_dbo_Collaborators_dbo_Users_UserB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collaborators" EntitySet="Collaborators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DesignSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_DesignSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="DesignSkills" EntitySet="DesignSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_MedicalSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="MedicalSkills" EntitySet="MedicalSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="ProgrammingSkills" EntitySet="ProgrammingSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SkillUserRelation_dbo_Skills_SkillId_Type" Association="Self.FK_dbo_SkillUserRelation_dbo_Skills_SkillId_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillUserRelation" EntitySet="SkillUserRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SkillUserRelation_dbo_Users_UserId" Association="Self.FK_dbo_SkillUserRelation_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SkillUserRelation" EntitySet="SkillUserRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SpeakingSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_SpeakingSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SpeakingSkills" EntitySet="SpeakingSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="Self.FK_dbo_UserClaims_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserClaims" EntitySet="UserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLocations_dbo_Locations_LocationID" Association="Self.FK_dbo_UserLocations_dbo_Locations_LocationID">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLocations_dbo_Users_UserID" Association="Self.FK_dbo_UserLocations_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLogins_dbo_Users_UserId" Association="Self.FK_dbo_UserLogins_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IdeallyConnectedTestDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Businesses">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="ChatService" Type="Boolean" Nullable="false" />
+          <Property Name="P2PService" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_dbo_Businesses_dbo_Locations_LocationID" FromRole="Businesses" ToRole="Locations" />
+        </EntityType>
+        <EntityType Name="Collaborators">
+          <Key>
+            <PropertyRef Name="UserA" />
+            <PropertyRef Name="UserB" />
+          </Key>
+          <Property Name="UserA" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserB" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Following" Type="Boolean" Nullable="false" />
+          <Property Name="Initiated" Type="Boolean" Nullable="false" />
+          <Property Name="InitialCollaboration" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Collaborators_dbo_Users_UserA" FromRole="Collaborators" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_dbo_Collaborators_dbo_Users_UserB" FromRole="Collaborators" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DesignSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeOfDesign" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Software" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_dbo_DesignSkills_dbo_Skills_ID_Type" FromRole="DesignSkills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateAbbreviation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Businesses" Relationship="Self.FK_dbo_Businesses_dbo_Locations_LocationID" FromRole="Locations" ToRole="Businesses" />
+          <NavigationProperty Name="UserLocations" Relationship="Self.FK_dbo_UserLocations_dbo_Locations_LocationID" FromRole="Locations" ToRole="UserLocations" />
+        </EntityType>
+        <EntityType Name="MedicalSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPR" Type="Boolean" Nullable="false" />
+          <Property Name="EKG" Type="Boolean" Nullable="false" />
+          <Property Name="Transfussions" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_dbo_MedicalSkills_dbo_Skills_ID_Type" FromRole="MedicalSkills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="ProgrammingSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProgrammingLanguages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Software" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type" FromRole="ProgrammingSkills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Expertise" Type="Byte" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DesignSkills" Relationship="Self.FK_dbo_DesignSkills_dbo_Skills_ID_Type" FromRole="Skills" ToRole="DesignSkills" />
+          <NavigationProperty Name="MedicalSkills" Relationship="Self.FK_dbo_MedicalSkills_dbo_Skills_ID_Type" FromRole="Skills" ToRole="MedicalSkills" />
+          <NavigationProperty Name="ProgrammingSkills" Relationship="Self.FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type" FromRole="Skills" ToRole="ProgrammingSkills" />
+          <NavigationProperty Name="SpeakingSkills" Relationship="Self.FK_dbo_SpeakingSkills_dbo_Skills_ID_Type" FromRole="Skills" ToRole="SpeakingSkills" />
+          <NavigationProperty Name="Users" Relationship="Self.SkillUserRelation" FromRole="Skills" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SpeakingSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_dbo_SpeakingSkills_dbo_Skills_ID_Type" FromRole="SpeakingSkills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="UserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="UserClaims" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserLocations">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="TotalVisitations" Type="Int32" Nullable="false" />
+          <Property Name="FirstVisited" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastVisited" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_dbo_UserLocations_dbo_Locations_LocationID" FromRole="UserLocations" ToRole="Locations" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_UserLocations_dbo_Users_UserID" FromRole="UserLocations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="UserLogins" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Collaborators" Relationship="Self.FK_dbo_Collaborators_dbo_Users_UserA" FromRole="Users" ToRole="Collaborators" />
+          <NavigationProperty Name="Collaborators1" Relationship="Self.FK_dbo_Collaborators_dbo_Users_UserB" FromRole="Users" ToRole="Collaborators" />
+          <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="Users" ToRole="UserClaims" />
+          <NavigationProperty Name="UserLocations" Relationship="Self.FK_dbo_UserLocations_dbo_Users_UserID" FromRole="Users" ToRole="UserLocations" />
+          <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="Users" ToRole="UserLogins" />
+          <NavigationProperty Name="Skills" Relationship="Self.SkillUserRelation" FromRole="Users" ToRole="Skills" />
+          <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_dbo_Businesses_dbo_Locations_LocationID">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Businesses" Type="Self.Businesses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Businesses">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collaborators_dbo_Users_UserA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Collaborators" Type="Self.Collaborators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collaborators">
+              <PropertyRef Name="UserA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Collaborators_dbo_Users_UserB">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Collaborators" Type="Self.Collaborators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collaborators">
+              <PropertyRef Name="UserB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DesignSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="DesignSkills" Type="Self.DesignSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="DesignSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLocations_dbo_Locations_LocationID">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="MedicalSkills" Type="Self.MedicalSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="MedicalSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="ProgrammingSkills" Type="Self.ProgrammingSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="ProgrammingSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SpeakingSkills_dbo_Skills_ID_Type">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="SpeakingSkills" Type="Self.SpeakingSkills" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="SpeakingSkills">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserClaims" Type="Self.UserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLocations_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserLogins_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SkillUserRelation">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRoles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="IdeallyConnectedTestDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Businesses" EntityType="Self.Businesses" />
+          <EntitySet Name="Collaborators" EntityType="Self.Collaborators" />
+          <EntitySet Name="DesignSkills" EntityType="Self.DesignSkills" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" />
+          <EntitySet Name="MedicalSkills" EntityType="Self.MedicalSkills" />
+          <EntitySet Name="ProgrammingSkills" EntityType="Self.ProgrammingSkills" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" />
+          <EntitySet Name="SpeakingSkills" EntityType="Self.SpeakingSkills" />
+          <EntitySet Name="UserClaims" EntityType="Self.UserClaims" />
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocations" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogins" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_dbo_Businesses_dbo_Locations_LocationID" Association="Self.FK_dbo_Businesses_dbo_Locations_LocationID">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Businesses" EntitySet="Businesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collaborators_dbo_Users_UserA" Association="Self.FK_dbo_Collaborators_dbo_Users_UserA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collaborators" EntitySet="Collaborators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Collaborators_dbo_Users_UserB" Association="Self.FK_dbo_Collaborators_dbo_Users_UserB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collaborators" EntitySet="Collaborators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DesignSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_DesignSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="DesignSkills" EntitySet="DesignSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLocations_dbo_Locations_LocationID" Association="Self.FK_dbo_UserLocations_dbo_Locations_LocationID">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_MedicalSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="MedicalSkills" EntitySet="MedicalSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="ProgrammingSkills" EntitySet="ProgrammingSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SpeakingSkills_dbo_Skills_ID_Type" Association="Self.FK_dbo_SpeakingSkills_dbo_Skills_ID_Type">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SpeakingSkills" EntitySet="SpeakingSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="Self.FK_dbo_UserClaims_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserClaims" EntitySet="UserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLocations_dbo_Users_UserID" Association="Self.FK_dbo_UserLocations_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserLogins_dbo_Users_UserId" Association="Self.FK_dbo_UserLogins_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="SkillUserRelation" Association="Self.SkillUserRelation">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IdeallyConnectedTestDbModelStoreContainer" CdmEntityContainer="IdeallyConnectedTestDbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Businesses">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Businesses">
+              <MappingFragment StoreEntitySet="Businesses">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ChatService" ColumnName="ChatService" />
+                <ScalarProperty Name="P2PService" ColumnName="P2PService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collaborators">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Collaborators">
+              <MappingFragment StoreEntitySet="Collaborators">
+                <ScalarProperty Name="UserA" ColumnName="UserA" />
+                <ScalarProperty Name="UserB" ColumnName="UserB" />
+                <ScalarProperty Name="Following" ColumnName="Following" />
+                <ScalarProperty Name="Initiated" ColumnName="Initiated" />
+                <ScalarProperty Name="InitialCollaboration" ColumnName="InitialCollaboration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignSkills">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.DesignSkills">
+              <MappingFragment StoreEntitySet="DesignSkills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TypeOfDesign" ColumnName="TypeOfDesign" />
+                <ScalarProperty Name="Software" ColumnName="Software" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Locations">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StateAbbreviation" ColumnName="StateAbbreviation" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalSkills">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.MedicalSkills">
+              <MappingFragment StoreEntitySet="MedicalSkills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CPR" ColumnName="CPR" />
+                <ScalarProperty Name="EKG" ColumnName="EKG" />
+                <ScalarProperty Name="Transfussions" ColumnName="Transfussions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgrammingSkills">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.ProgrammingSkills">
+              <MappingFragment StoreEntitySet="ProgrammingSkills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ProgrammingLanguages" ColumnName="ProgrammingLanguages" />
+                <ScalarProperty Name="Software" ColumnName="Software" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Expertise" ColumnName="Expertise" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpeakingSkills">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.SpeakingSkills">
+              <MappingFragment StoreEntitySet="SpeakingSkills">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClaims">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.UserClaims">
+              <MappingFragment StoreEntitySet="UserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLocations">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.UserLocations">
+              <MappingFragment StoreEntitySet="UserLocations">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="TotalVisitations" ColumnName="TotalVisitations" />
+                <ScalarProperty Name="FirstVisited" ColumnName="FirstVisited" />
+                <ScalarProperty Name="LastVisited" ColumnName="LastVisited" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.UserLogins">
+              <MappingFragment StoreEntitySet="UserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IdeallyConnectedTestDbModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SkillUserRelation" TypeName="IdeallyConnectedTestDbModel.SkillUserRelation" StoreEntitySet="SkillUserRelation">
+            <EndProperty Name="Skills">
+              <ScalarProperty Name="ID" ColumnName="SkillId" />
+              <ScalarProperty Name="Type" ColumnName="Type" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserRoles" TypeName="IdeallyConnectedTestDbModel.UserRoles" StoreEntitySet="UserRoles">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

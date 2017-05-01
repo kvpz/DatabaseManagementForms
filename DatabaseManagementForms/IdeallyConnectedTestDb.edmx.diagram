@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acc02792f05b4f07bb455bb1d2e16c4f" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Businesses" Width="1.5" PointX="11.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Collaborators" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.DesignSkills" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Locations" Width="1.5" PointX="9" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.MedicalSkills" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.ProgrammingSkills" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Roles" Width="1.5" PointX="3.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Skills" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.SpeakingSkills" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.UserClaims" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.UserLocations" Width="1.5" PointX="11.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.UserLogins" Width="1.5" PointX="8.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdeallyConnectedTestDbModel.Users" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_Businesses_dbo_Locations_LocationID" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_Collaborators_dbo_Users_UserA" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_Collaborators_dbo_Users_UserB" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_DesignSkills_dbo_Skills_ID_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_UserLocations_dbo_Locations_LocationID" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_MedicalSkills_dbo_Skills_ID_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_ProgrammingSkills_dbo_Skills_ID_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_SpeakingSkills_dbo_Skills_ID_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_UserClaims_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_UserLocations_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.FK_dbo_UserLogins_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.SkillUserRelation" ManuallyRouted="false" />
+        <AssociationConnector Association="IdeallyConnectedTestDbModel.UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
