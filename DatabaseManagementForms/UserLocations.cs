@@ -15,7 +15,7 @@ namespace DatabaseManagementForms
     public partial class UserLocations
     {
         public string UserID { get; set; }
-        public int LocationID { get; set; }
+        public System.Guid LocationID { get; set; }
         public int TotalVisitations { get; set; }
         public System.DateTime FirstVisited { get; set; }
         public System.DateTime LastVisited { get; set; }

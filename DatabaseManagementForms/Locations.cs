@@ -21,7 +21,7 @@ namespace DatabaseManagementForms
             this.UserLocations = new HashSet<UserLocations>();
         }
     
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public string State { get; set; }

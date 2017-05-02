@@ -37,7 +37,7 @@ namespace DatabaseManagementForms
             Random random = new Random();
             Users newUser = new Users();
             DataRow customer = customerTableAdapter.GetData().Rows[(random.Next() + customerTableAdapter.GetData().Count) % customerTableAdapter.GetData().Count];
-            newUser.Id = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            newUser.Id = Guid.NewGuid().ToString();
             newUser.FirstName = (string)customer["FirstName"];
             newUser.LastName = (string)customer["LastName"];
             newUser.UserName = newUser.FirstName + newUser.LastName;
@@ -74,7 +74,7 @@ namespace DatabaseManagementForms
 
         private void BulkCreateRandomUsers_button_Click(object sender, EventArgs e)
         {
-            UsersUtility.CreateRandomUsers(customerTableAdapter, usersBindingSource);
+            UsersUtility.CreateNewUsers(customerTableAdapter, ref usersBindingSource, ref _context);
             Refresh();
         }
 

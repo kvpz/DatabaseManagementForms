@@ -15,37 +15,47 @@ namespace DatabaseManagementForms
     public class UsersUtility
     {
         public static Random random = new Random(); 
-        public static void CreateRandomUsers(CustomerTableAdapter customerTableAdapter, BindingSource bindingSource)
+
+        public static void CreateNewUsers(CustomerTableAdapter customerTableAdapter, 
+            ref BindingSource bindingSource, ref IdeallyConnectedTestDbEntities context)
         {
-            Random random = new Random();
+            // Iterating through the list of users from AdventureWorksLT2008
             foreach (DataRow customer in customerTableAdapter.GetData().Rows)
             {
                 Users newUser = new Users();
-                newUser.Id = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                newUser.Id = Guid.NewGuid().ToString();
                 newUser.FirstName = (string)customer["FirstName"];
                 newUser.LastName = (string)customer["LastName"];
                 newUser.UserName = newUser.FirstName + newUser.LastName + Convert.ToString(random.Next()).Substring(0, 5);
                 newUser.PhoneNumber = (string)customer["Phone"];
                 newUser.Email = (string)customer["EmailAddress"];
                 newUser.Created = DateTime.Now;
+                context.Users.Add(newUser);
+                if(bindingSource.Count % 100 == 0)
+                {
+                    context.SaveChanges();
+                }
                 bindingSource.Add(newUser);
-            } 
+            }
         }
 
+        /// <summary>
+        /// Create a list of random dates (DateTime objects).
+        /// </summary>
+        /// <param name="amount">The amount of random dates to produce.</param>
+        /// <returns></returns>
         public static List<DateTime> CreateRandomDates(int amount)
         {
-            List<DateTime> dates = new List<DateTime>(new DateTime[amount]);
-            DateTime minDate = new DateTime(2012, 1, 1);
-            DateTime maxDate = DateTime.Now;
-            long elapsedTicks = maxDate.Ticks - minDate.Ticks;
+            List<DateTime> randomDates = new List<DateTime>(new DateTime[amount]);
+            long elapsedTicks = DateTime.Now.Ticks - (new DateTime(2012, 1, 1)).Ticks;
             
-
+            // Create a random date within a recent time frame (after 2012).
             for(int i = 0; i < amount; ++i)
             {
-                dates[i] = new DateTime(DateTime.Now.Ticks - (elapsedTicks / random.Next(1,100)));
+                randomDates[i] = new DateTime(DateTime.Now.Ticks - (elapsedTicks / random.Next(1,100)));
             }
 
-            return dates;
+            return randomDates;
         }
     }
 

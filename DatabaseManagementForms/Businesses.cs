@@ -15,7 +15,7 @@ namespace DatabaseManagementForms
     public partial class Businesses
     {
         public string Name { get; set; }
-        public int LocationID { get; set; }
+        public System.Guid LocationID { get; set; }
         public bool ChatService { get; set; }
         public bool P2PService { get; set; }
     
